@@ -26,8 +26,26 @@ class TidyFileGestion():
         return True
     else:
       return False
+  def createDirectory(self, tidyPath):
+    if not self.exists(tidyPath):
+      os.mkdir(tidyPath)
+      return True
+    else:
+      return False
+  def createFile(self, tidyPath):
+    if not self.exists(tidyPath):
+      open(tidyPath, "x")
+      return True
+    else:
+      return False
   def clear(self, tidyPath):
     if self.exists(tidyPath):
-      
+      if os.path.isdir(tidyPath):
+        shutil.rmtree(tidyPath)
+        os.mkdir(tidyPath)
+      else:
+        os.remove(tidyPath)
+        open(tidyPath, "x")
+      return True
     else:
       return False
