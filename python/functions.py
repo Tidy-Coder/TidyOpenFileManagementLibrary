@@ -1,5 +1,21 @@
 import os
 import shutil
+class TidyFile():
+  def __init__(self, tidyFilePath = None):
+    if not tidyFilePath == None:
+      self.openFile(tidyFilePath)
+  def openFile(self, tidyFilePath):
+    self.selectionnedFile = tidyFilePath
+  def read(self, firstCharacters = None, inBinary = False):
+    if inBinary:
+      binaryOrNotBinary = "b"
+    else:
+      binaryOrNotBinary = "t"
+    with open(self.selectionnedFile, "r"+binaryOrNotBinary) as fileToRead:
+      if firstCharacters == None:
+        return fileToRead.read()
+      else:
+        
 class TidyFileGestion():
   def exists(self, tidyPath):
     if os.path.exists(tidyPath):
