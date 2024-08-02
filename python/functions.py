@@ -15,7 +15,7 @@ class TidyFile():
       if firstCharacters == None:
         return fileToRead.read()
       else:
-        
+        return fileToRead.read(firstCharacters)
 class TidyFileGestion():
   def exists(self, tidyPath):
     if os.path.exists(tidyPath):
@@ -50,10 +50,15 @@ class TidyFileGestion():
       return False
   def createFile(self, tidyPath):
     if not self.exists(tidyPath):
-      open(tidyPath, "x")
+      open(tidyPath, "x").close()
       return True
     else:
       return False
+  def size(self, tidyPath):
+    if os.path.exists(tidyPath):
+      return os.path.getsize(tidyPath)
+    else:
+      return None
   def clear(self, tidyPath):
     if self.exists(tidyPath):
       if os.path.isdir(tidyPath):
@@ -61,7 +66,7 @@ class TidyFileGestion():
         os.mkdir(tidyPath)
       else:
         os.remove(tidyPath)
-        open(tidyPath, "x")
+        open(tidyPath, "x").close()
       return True
     else:
       return False
