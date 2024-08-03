@@ -20,6 +20,25 @@ struct TidyResult{
 };
 typedef struct TidyResult TidyResult;
 
+TidyBoolean tidyFg_exists(const char[] tidyPath){
+#ifdef _WIN32
+  DWORD tidyAttributes = GetFileAttributes(tidyPath);
+  if(tidyAttributes != INVALID_FILE_ATTRIBUTES){
+    return TRUE
+  }
+  else{
+    return FALSE;
+  }
+#else
+  if(access(tidyPath, F_OK) == 0){
+    return TRUE;
+  }
+  else{
+    return FALSE;
+  }
+#endif
+}
+
 # this function check if the path is a directory.
 TidyResult tidyFg_isDirectory(const char[] tidyPath){
   TidyResult resultHere;
