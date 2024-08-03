@@ -7,17 +7,23 @@ enum TidyBoolean{
 typedef enum TidyBoolean TidyBoolean;
 struct TidyFileAndBoolean{
   FILE* file,
+  char* typeOfFopen,
   TidyBoolean error
-}
-typedef struct TidyFileAndBoolean TidyFileAndBoolean
+};
+typedef struct TidyFileAndBoolean TidyFileAndBoolean;
 
+
+# this function check if the file exists or don't exists.
 TidyFileAndBoolean tidyFg_exists(char[] tidyFilename){
   FILE* tidyFile = fopen(tidyFilename, "r")
+  TidyFileAndBoolean resultHere;
+  resultHere.file = tidyFile;
+  resultHere.typeOfFopen = "r";
   if (tidyFile){
-    TidyFileAndBoolean 
-    return TRUE
+    resultHere.error = FALSE;
   }
   else{
-    return FALSE
+    resultHere.error = TRUE;
   }
+  return resultHere;
 }
