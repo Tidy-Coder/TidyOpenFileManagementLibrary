@@ -151,6 +151,12 @@ TidyBoolean tidyFg_delete(char[] tidyPath){
       return FALSE;
     }
 #else
-    if(rm)
+    if(rmdir(tidyPath) == 0){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+#endif
   }
 }
