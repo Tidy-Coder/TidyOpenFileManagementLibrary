@@ -119,4 +119,7 @@ TidyBoolean createDirectory(char[] tidyPath){
   else{
     return FALSE;
   }
+#endif
 }
+
+
