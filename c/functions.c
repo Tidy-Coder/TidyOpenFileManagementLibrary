@@ -110,8 +110,13 @@ TidyBoolean createDirectory(char[] tidyPath){
     return TRUE;
   }
   else{
-    return FALSE
+    return FALSE;
   }
 #else
-  
+  if(mkdir(tidyPath, 0755) == 0){
+    return TRUE;
+  }
+  else{
+    return FALSE;
+  }
 }
