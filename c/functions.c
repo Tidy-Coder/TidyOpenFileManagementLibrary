@@ -122,4 +122,35 @@ TidyBoolean tidyFg_createDirectory(char[] tidyPath){
 #endif
 }
 
-
+TidyBoolean tidyFg_delete(char[] tidyPath){
+  TidyResult tidyIsFile = tidyFg_isFile(tidyPath);
+  TidyResult tidyIsDirectory = tidyFg_isDirectory(tidyPath)
+  if(tidyIsFile.error == FALSE && tidyIsFile.result == TRUE){
+#ifdef _WIN32
+    if(DeleteFile(tidyPath)){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+#else
+    if(remove(tidyPath) == 0){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+#endif
+  }
+  if(tidyIsDirectory.error == FALSE && tidyIsDirectory.result = TRUE){
+#ifdef _WIN32
+    if(RemoveDirectory(tidyPath)){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+#else
+    if(rm)
+  }
+}
