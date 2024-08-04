@@ -104,7 +104,7 @@ TidyResult tidyFg_isFile(const char[] tidyPath){
   return resultHere;
 }
 
-TidyBoolean createDirectory(char[] tidyPath){
+TidyBoolean tidyFg_createDirectory(char[] tidyPath){
 #ifdef _WIN32
   if(CreateDirectory(tidyPath, NULL)){
     return TRUE;
