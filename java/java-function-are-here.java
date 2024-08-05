@@ -19,4 +19,7 @@ public class TidyOpenFileManagementLibrary(){
   public boolean createFile(String tidyPath){
     return (new File(tidyPath)).createNewFile();
   }
+  public long size(String tidyPath){
+    return (new File(tidyPath)).length();
+  }
 }
