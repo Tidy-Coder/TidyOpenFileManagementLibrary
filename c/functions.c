@@ -160,3 +160,14 @@ TidyBoolean tidyFg_delete(char[] tidyPath){
 #endif
   }
 }
+
+TidyBoolean tidyFg_createFile(char[] tidyPath){
+  FILE* fileHere  = fopen(tidyPath, "w");
+  if(fileHere == NULL){
+    return FALSE
+  }
+  if(fclose(fileHere) != 0){
+    return FALSE
+  }
+  return TRUE
+}
