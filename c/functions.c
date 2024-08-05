@@ -40,7 +40,7 @@ TidyBoolean tidyFg_exists(const char[] tidyPath){
 }
 
 # this function check if the path is a directory.
-TidyResult tidyFg_isDirectory(const char[] tidyPath){
+TidyResult tidyFg_isFolder(const char[] tidyPath){
   TidyResult resultHere;
 #ifdef _WIN32
   DWORD tidyAttributes = getFileAttributes(tidyPath);
@@ -104,7 +104,7 @@ TidyResult tidyFg_isFile(const char[] tidyPath){
   return resultHere;
 }
 
-TidyBoolean tidyFg_createDirectory(char[] tidyPath){
+TidyBoolean tidyFg_createFolder(char[] tidyPath){
 #ifdef _WIN32
   if(CreateDirectory(tidyPath, NULL)){
     return TRUE;
