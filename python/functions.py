@@ -26,7 +26,7 @@ class TidyFileGestion():
         return True
     else:
       return False
-  def createDirectory(self, tidyPath):
+  def createFolder(self, tidyPath):
     if not self.exists(tidyPath):
       os.mkdir(tidyPath)
       return True
