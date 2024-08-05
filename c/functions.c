@@ -20,7 +20,7 @@ struct TidyResult{
 };
 typedef struct TidyResult TidyResult;
 
-TidyBoolean tidyFg_exists(const char[] tidyPath){
+TidyBoolean tidyFML_exists(const char[] tidyPath){
 #ifdef _WIN32
   DWORD tidyAttributes = GetFileAttributes(tidyPath);
   if(tidyAttributes != INVALID_FILE_ATTRIBUTES){
@@ -40,7 +40,7 @@ TidyBoolean tidyFg_exists(const char[] tidyPath){
 }
 
 # this function check if the path is a directory.
-TidyResult tidyFg_isFolder(const char[] tidyPath){
+TidyResult tidyFML_isFolder(const char[] tidyPath){
   TidyResult resultHere;
 #ifdef _WIN32
   DWORD tidyAttributes = getFileAttributes(tidyPath);
@@ -72,7 +72,7 @@ TidyResult tidyFg_isFolder(const char[] tidyPath){
   return resultHere;
 }
 # this function check if the path is a file.
-TidyResult tidyFg_isFile(const char[] tidyPath){
+TidyResult tidyFML_isFile(const char[] tidyPath){
   TidyResult resultHere;
 #ifdef _WIN32
   DWORD tidyAttributes = getFileAttributes(tidyPath);
@@ -104,7 +104,7 @@ TidyResult tidyFg_isFile(const char[] tidyPath){
   return resultHere;
 }
 
-TidyBoolean tidyFg_createFolder(char[] tidyPath){
+TidyBoolean tidyFML_createFolder(char[] tidyPath){
 #ifdef _WIN32
   if(CreateDirectory(tidyPath, NULL)){
     return TRUE;
@@ -122,9 +122,9 @@ TidyBoolean tidyFg_createFolder(char[] tidyPath){
 #endif
 }
 
-TidyBoolean tidyFg_delete(char[] tidyPath){
-  TidyResult tidyIsFile = tidyFg_isFile(tidyPath);
-  TidyResult tidyIsDirectory = tidyFg_isDirectory(tidyPath)
+TidyBoolean tidyFML_delete(char[] tidyPath){
+  TidyResult tidyIsFile = tidyFML_isFile(tidyPath);
+  TidyResult tidyIsDirectory = tidyFML_isDirectory(tidyPath)
   if(tidyIsFile.error == FALSE && tidyIsFile.result == TRUE){
 #ifdef _WIN32
     if(DeleteFile(tidyPath)){
@@ -161,7 +161,7 @@ TidyBoolean tidyFg_delete(char[] tidyPath){
   }
 }
 
-TidyBoolean tidyFg_createFile(char[] tidyPath){
+TidyBoolean tidyFML_createFile(char[] tidyPath){
   FILE* fileHere  = fopen(tidyPath, "w");
   if(fileHere == NULL){
     return FALSE
@@ -170,4 +170,37 @@ TidyBoolean tidyFg_createFile(char[] tidyPath){
     return FALSE
   }
   return TRUE
+}
+
+TidyBoolean tidyFML_clear(char[] tidyPath){
+  if(tidyFML_delete(tidyPath) == FALSE){
+    return FALSE;
+  }
+  
+  TidyResult tidyIsFile = tidyFML_isFile(tidyPath);
+  if(tidyIsFile.error == TRUE){
+    return FALSE;
+  }
+  else if(tidyIsFile.result == TRUE){
+    if(tidyFML_createFile(tidyPath) == TRUE){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+  }
+  
+  TidyResult tidyIsFolder = tidyFML_isFolder(tidyPath);
+  if(tidyIsFolder.error == TRUE){
+    return FALSE;
+  }
+  else if(tidyIsFolder.result == TRUE){
+    if(tidyFML_createFolder(tidyPath) == TRUE){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+  }
+  return FALSE;
 }
