@@ -22,4 +22,14 @@ public class TidyOpenFileManagementLibrary(){
   public long size(String tidyPath){
     return (new File(tidyPath)).length();
   }
+  public boolean clear(String tidyPath){
+    if(this.isFile(tidyPath)){
+      this.delete(tidyPath);
+      this.createFile(tidyPath);
+    }
+    else if(this.isFolder(tidyPath)){
+      this.delete(tidyPath);
+      this.createFolder(tidyPath);
+    }
+  }
 }
