@@ -79,5 +79,27 @@ namespace UtilityLibraries{
       }
       return false;
     }
+    long sizeDirectory(DirectoryInfo tidyInfoHere){
+      long tidyNumReturn = 0;
+      
+      foreach(FileInfo f in tidyInfoHere.GetFiles()){
+        tidyNumReturn += f.Length;
+      }
+      foreach(DirectoryInfo infoIsHere in tidyInfoHere.GetDirectories()){
+        tidyNumReturn += this.sizeDirectory(infoIsHere)
+      }
+      return tidyNumReturn
+    }
+    long size(string tidyPath){
+      if(this.isFile(tidyPath)){
+        return (new FileInfo(tidyPath)).Length;
+      }
+      else if(this.isFolder(tidyPath)){
+        return this.sizeDirectory(new DirectoryInfo(tidyPath));
+      }
+      else{
+        return -1;
+      }
+    }
   }
 }
