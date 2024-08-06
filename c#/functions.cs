@@ -38,5 +38,23 @@ namespace UtilityLibraries{
       }
       return false;
     }
+    bool createFile(string tidyPath){
+      try{
+        File.Create(tidyPath);
+        return true;
+      }
+      catch(Exception e){
+        return false;
+      }
+    }
+    bool createFolder(string tidyPath){
+      try{
+        Directory.CreateDirectory(tidyPath);
+        return true;
+      }
+      catch(Exception e){
+        return false;
+      }
+    }
   }
 }
