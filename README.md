@@ -9,4 +9,4 @@ This repo contains functions that help to manipulate files in several languages 
 |delete      |✅ |  ✅  | ✅ |✅ |
 |createFile  |✅ |  ✅  | ✅ |✅ |
 |size        |❌ |  ✅  | ✅ |❌ |
-|clear       |✅ |  ✅  | ✅ |❌ |
+|clear       |✅ |  ✅  | ✅ |✅ |
