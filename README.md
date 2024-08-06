@@ -5,8 +5,8 @@ This repo contains functions that help to manipulate files in several languages 
 |exists   |✅|✅|✅|✅|
 |isFolder|✅|✅|✅|✅|
 |isFile|✅|✅|✅|✅|
-|createFolder|✅|✅|✅|❎|
+|createFolder|✅|✅|✅|❌|
 |delete|✅|✅|✅|✅|
-|createFile|✅|✅|✅|❎|
-|size|No|✅|✅|❎|
-|clear|✅|✅|✅|❎|
+|createFile|✅|✅|✅|❌|
+|size|No|✅|✅|❌|
+|clear|✅|✅|✅|❌|
