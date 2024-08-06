@@ -17,5 +17,26 @@ namespace UtilityLibraries{
     bool isFile(string tidyPath){
       return File.Exists(tidyPath);
     }
+    bool delete(string tidyPath){
+      if(this.isFolder(tidyPath)){
+        try{
+          Directory.Delete(tidyPath, true);
+          return true;
+        }
+        catch(Exception e){
+          return false;
+        }
+      }
+      else if(this.isFile(tidyPath)){
+        try{
+          File.Delete(tidyPath);
+          return true;
+        }
+        catch(Exception z){
+          return false;
+        }
+      }
+      return false;
+    }
   }
 }
