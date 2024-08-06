@@ -26,10 +26,13 @@ public class TidyOpenFileManagementLibrary(){
     if(this.isFile(tidyPath)){
       this.delete(tidyPath);
       this.createFile(tidyPath);
+      return true;
     }
     else if(this.isFolder(tidyPath)){
       this.delete(tidyPath);
       this.createFolder(tidyPath);
+      return true;
     }
+    return false;
   }
 }
