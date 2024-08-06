@@ -56,5 +56,28 @@ namespace UtilityLibraries{
         return false;
       }
     }
+    bool clear(string tidyPath){
+      if(this.isFolder(tidyPath)){
+        try{
+          Directory.Delete(tidyPath, true);
+          Directory.CreateDirectory(tidyPath);
+          return true;
+        }
+        catch(Exception e){
+          return false;
+        }
+      }
+      else if(this.isFile(tidyPath)){
+        try{
+          File.Delete(tidyPath);
+          File.Create(tidyPath);
+          return true;
+        }
+        catch(Exception e){
+          return false;
+        }
+      }
+      return false;
+    }
   }
 }
