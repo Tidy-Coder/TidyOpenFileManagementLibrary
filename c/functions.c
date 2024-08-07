@@ -39,7 +39,6 @@ TidyBoolean tidyFML_exists(const char[] tidyPath){
 #endif
 }
 
-# this function check if the path is a directory.
 TidyResult tidyFML_isFolder(const char[] tidyPath){
   TidyResult resultHere;
 #ifdef _WIN32
@@ -71,7 +70,7 @@ TidyResult tidyFML_isFolder(const char[] tidyPath){
 #endif
   return resultHere;
 }
-# this function check if the path is a file.
+
 TidyResult tidyFML_isFile(const char[] tidyPath){
   TidyResult resultHere;
 #ifdef _WIN32
