@@ -1,0 +1,15 @@
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/c#.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/c#.AssemblyInfoInputs.cache
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/c#.AssemblyInfo.cs
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/c#.csproj.CoreCompileInputs.cache
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/c#.sourcelink.json
+/workspaces/TidyOpenFileManagementLibrary/c#/bin/Debug/net8.0/c#
+/workspaces/TidyOpenFileManagementLibrary/c#/bin/Debug/net8.0/c#.deps.json
+/workspaces/TidyOpenFileManagementLibrary/c#/bin/Debug/net8.0/c#.runtimeconfig.json
+/workspaces/TidyOpenFileManagementLibrary/c#/bin/Debug/net8.0/c#.dll
+/workspaces/TidyOpenFileManagementLibrary/c#/bin/Debug/net8.0/c#.pdb
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/c#.dll
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/refint/c#.dll
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/c#.pdb
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/c#.genruntimeconfig.cache
+/workspaces/TidyOpenFileManagementLibrary/c#/obj/Debug/net8.0/ref/c#.dll

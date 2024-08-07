@@ -12,7 +12,7 @@ namespace UtilityLibraries{
       }
     }
     bool isFolder(string tidyPath){
-      return Directory.Exists(string tidyPath);
+      return Directory.Exists(tidyPath);
     }
     bool isFile(string tidyPath){
       return File.Exists(tidyPath);
@@ -23,7 +23,7 @@ namespace UtilityLibraries{
           Directory.Delete(tidyPath, true);
           return true;
         }
-        catch(Exception e){
+        catch{
           return false;
         }
       }
@@ -32,7 +32,7 @@ namespace UtilityLibraries{
           File.Delete(tidyPath);
           return true;
         }
-        catch(Exception z){
+        catch{
           return false;
         }
       }
@@ -43,7 +43,7 @@ namespace UtilityLibraries{
         File.Create(tidyPath);
         return true;
       }
-      catch(Exception e){
+      catch{
         return false;
       }
     }
@@ -52,7 +52,7 @@ namespace UtilityLibraries{
         Directory.CreateDirectory(tidyPath);
         return true;
       }
-      catch(Exception e){
+      catch{
         return false;
       }
     }
@@ -63,7 +63,7 @@ namespace UtilityLibraries{
           Directory.CreateDirectory(tidyPath);
           return true;
         }
-        catch(Exception e){
+        catch{
           return false;
         }
       }
@@ -73,7 +73,7 @@ namespace UtilityLibraries{
           File.Create(tidyPath);
           return true;
         }
-        catch(Exception e){
+        catch{
           return false;
         }
       }
@@ -86,9 +86,9 @@ namespace UtilityLibraries{
         tidyNumReturn += f.Length;
       }
       foreach(DirectoryInfo infoIsHere in tidyInfoHere.GetDirectories()){
-        tidyNumReturn += this.sizeDirectory(infoIsHere)
+        tidyNumReturn += this.sizeDirectory(infoIsHere);
       }
-      return tidyNumReturn
+      return tidyNumReturn;
     }
     long size(string tidyPath){
       if(this.isFile(tidyPath)){
