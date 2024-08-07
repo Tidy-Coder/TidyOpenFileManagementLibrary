@@ -1,6 +1,6 @@
-import java.io.file;
+import java.io.*;
 
-public class TidyOpenFileManagementLibrary(){
+public class TidyOpenFileManagementLibrary{
   public boolean exists(String tidyPath){
     return (new File(tidyPath)).exists();
   }
@@ -11,13 +11,19 @@ public class TidyOpenFileManagementLibrary(){
     return (new File(tidyPath)).isFile();
   }
   public boolean createFolder(String tidyPath){
-    return (new File(tidyPath)).mkdir(tidyPath);
+    return (new File(tidyPath)).mkdir();
   }
   public boolean delete(String tidyPath){
-    return (new File(tidyPath)).delete(tidyPath);
+    return (new File(tidyPath)).delete();
   }
   public boolean createFile(String tidyPath){
-    return (new File(tidyPath)).createNewFile();
+    try{
+      (new File(tidyPath)).createNewFile();
+      return true;
+    }
+    catch(IOException eIsHere){
+      return false;
+    }
   }
   public long size(String tidyPath){
     return (new File(tidyPath)).length();

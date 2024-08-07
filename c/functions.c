@@ -19,8 +19,7 @@ struct TidyResult{
   TidyBoolean error;
 };
 typedef struct TidyResult TidyResult;
-
-TidyBoolean tidyFML_exists(const char[] tidyPath){
+TidyBoolean tidyFML_exists(const char tidyPath[]){
 #ifdef _WIN32
   DWORD tidyAttributes = GetFileAttributes(tidyPath);
   if(tidyAttributes != INVALID_FILE_ATTRIBUTES){
@@ -39,7 +38,7 @@ TidyBoolean tidyFML_exists(const char[] tidyPath){
 #endif
 }
 
-TidyResult tidyFML_isFolder(const char[] tidyPath){
+TidyResult tidyFML_isFolder(const char tidyPath[]){
   TidyResult resultHere;
 #ifdef _WIN32
   DWORD tidyAttributes = getFileAttributes(tidyPath);
@@ -59,7 +58,7 @@ TidyResult tidyFML_isFolder(const char[] tidyPath){
   if(stat(tidyPath, &tidyPathStat) != 0){
     resultHere.error = TRUE;
   }
-  if(S_ISDIR(tidyathStat.st_mode)){
+  if(S_ISDIR(tidyPathStat.st_mode)){
     resultHere.error = FALSE;
     resultHere.result = TRUE;
   }
@@ -71,7 +70,7 @@ TidyResult tidyFML_isFolder(const char[] tidyPath){
   return resultHere;
 }
 
-TidyResult tidyFML_isFile(const char[] tidyPath){
+TidyResult tidyFML_isFile(const char tidyPath[]){
   TidyResult resultHere;
 #ifdef _WIN32
   DWORD tidyAttributes = getFileAttributes(tidyPath);
@@ -91,7 +90,7 @@ TidyResult tidyFML_isFile(const char[] tidyPath){
   if(stat(tidyPath, &tidyPathStat) != 0){
     resultHere.error = TRUE;
   }
-  if(S_ISREG(tidyathStat.st_mode)){
+  if(S_ISREG(tidyPathStat.st_mode)){
     resultHere.error = FALSE;
     resultHere.result = TRUE;
   }
@@ -103,7 +102,7 @@ TidyResult tidyFML_isFile(const char[] tidyPath){
   return resultHere;
 }
 
-TidyBoolean tidyFML_createFolder(char[] tidyPath){
+TidyBoolean tidyFML_createFolder(const char tidyPath[]){
 #ifdef _WIN32
   if(CreateDirectory(tidyPath, NULL)){
     return TRUE;
@@ -121,9 +120,9 @@ TidyBoolean tidyFML_createFolder(char[] tidyPath){
 #endif
 }
 
-TidyBoolean tidyFML_delete(char[] tidyPath){
+TidyBoolean tidyFML_delete(const char tidyPath[]){
   TidyResult tidyIsFile = tidyFML_isFile(tidyPath);
-  TidyResult tidyIsDirectory = tidyFML_isDirectory(tidyPath)
+  TidyResult tidyIsDirectory = tidyFML_isFolder(tidyPath);
   if(tidyIsFile.error == FALSE && tidyIsFile.result == TRUE){
 #ifdef _WIN32
     if(DeleteFile(tidyPath)){
@@ -141,7 +140,7 @@ TidyBoolean tidyFML_delete(char[] tidyPath){
     }
 #endif
   }
-  if(tidyIsDirectory.error == FALSE && tidyIsDirectory.result = TRUE){
+  if(tidyIsDirectory.error == FALSE && tidyIsDirectory.result == TRUE){
 #ifdef _WIN32
     if(RemoveDirectory(tidyPath)){
       return TRUE;
@@ -160,18 +159,18 @@ TidyBoolean tidyFML_delete(char[] tidyPath){
   }
 }
 
-TidyBoolean tidyFML_createFile(char[] tidyPath){
+TidyBoolean tidyFML_createFile(const char tidyPath[]){
   FILE* fileHere  = fopen(tidyPath, "w");
   if(fileHere == NULL){
-    return FALSE
+    return FALSE;
   }
   if(fclose(fileHere) != 0){
-    return FALSE
+    return FALSE;
   }
-  return TRUE
+  return TRUE;
 }
 
-TidyBoolean tidyFML_clear(char[] tidyPath){
+TidyBoolean tidyFML_clear(const char tidyPath[]){
   if(tidyFML_delete(tidyPath) == FALSE){
     return FALSE;
   }
