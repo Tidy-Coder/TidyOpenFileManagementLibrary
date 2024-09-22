@@ -19,6 +19,7 @@ struct TidyResult{
   TidyBoolean error;
 };
 typedef struct TidyResult TidyResult;
+
 TidyBoolean tidyFML_exists(const char tidyPath[]){
 #ifdef _WIN32
   DWORD tidyAttributes = GetFileAttributes(tidyPath);
@@ -201,4 +202,33 @@ TidyBoolean tidyFML_clear(const char tidyPath[]){
     }
   }
   return FALSE;
+}
+
+long tidyFML_fileSize(const char[] tidyPath){
+#ifdef WIN32
+  HANDLE hFile = CreateFile(
+    tidyPath,
+    GENERIC_READ,
+    FILE_SHARE_READ,
+    NULL,
+    OPEN_EXISTING,
+    FILE_ATTRIBUTE_NORMAL,
+    NULL
+  );
+  if(hFile == INVALID_HANDLE_FILE){
+    return -1;
+  }
+  DWORD tidySize = GetFileSize(hFile, NULL);
+  CloseHandle(hFile);
+  if(tidySize == INVALID_FILE_SIZE){
+    return -1;
+  }
+  else{
+    return (long)tidySize;
+  }
+#else
+  struct stat st;
+  stat(tidyPath, &st);
+  return (long)st.st_size;
+#endif
 }
