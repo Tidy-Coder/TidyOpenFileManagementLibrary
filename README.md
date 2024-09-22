@@ -8,5 +8,5 @@ This repo contains functions that help to manipulate files in several languages 
 |createFolder|✅ |  ✅  | ✅ |✅ |
 |delete      |✅ |  ✅  | ✅ |✅ |
 |createFile  |✅ |  ✅  | ✅ |✅ |
-|size        |❌ |  ✅  | ✅ |✅ |
+|size        |✅ |  ✅  | ✅ |✅ |
 |clear       |✅ |  ✅  | ✅ |✅ |
