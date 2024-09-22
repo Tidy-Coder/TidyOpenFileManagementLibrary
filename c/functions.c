@@ -2,10 +2,17 @@
 #include <stdlib.h>
 
 #ifdef _WIN32
+
 #include <windows.h>
+#define TIDY_MAX_PATH = MAX_PATH
+
 #else
+
+#include <linux/limits.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#define TIDY_MAX_PATH = PATH_MAX
+
 #endif
 
 enum TidyBoolean{
@@ -19,6 +26,18 @@ struct TidyResult{
   TidyBoolean error;
 };
 typedef struct TidyResult TidyResult;
+
+struct TidyListPath{
+  char* result[TIDY_MAX_PATH];
+  TidyBoolean error;
+};
+typedef struct TidyListPath TidyListPath;
+
+enum TidyOSType{
+  WINDOWS,
+  UNIX
+};
+typedef enum TidyOSType TidyOSType;
 
 TidyBoolean tidyFML_exists(const char tidyPath[]){
 #ifdef _WIN32
@@ -232,3 +251,64 @@ long tidyFML_fileSize(const char[] tidyPath){
   return (long)st.st_size;
 #endif
 }
+
+TidyListPath tidyFML_list(const char[] tidyPath){
+  TidyListPath tidyListPath;
+  tidyListPath.result = [];
+  
+  WIN32_FIND_DATA tidyFind;
+  HANDLE tidyDir = FindFirstFile(tidyPath, &tidyFind);
+  if(tidyDir == INVALID_HANDLE_VALUE){
+    tidyListPath.error = TRUE;
+    return tidyListPath;
+  }
+  do{
+    tidyListPath += tidyFind.cFileName;
+  } while(FindNextFile(tidyDir, &tidyFind) != 0);
+  return tidyListPath;
+}
+
+long tidyFML_folderSize(const char[] tidyPath){
+  long tidyNum = 0;
+  WIN32_FIND_DATA tidyFind;
+  HANDLE tidyDir = FindFirstFile(tidyPath, &tidyFind);
+  if(tidyDir == INVALID_HANDLE_VALUE){
+    return -1;
+  }
+  do{
+    char tidyAbsolutePath[TIDY_MAX_PATH];
+    snprintf(tidyAbsolutePath, TIDY_MAX_PATH, "%s//%s", tidyPath, tidyFind.cFileName);
+    if(tidyFML_isFile(tidyAbsolutePath)){
+      tidyNum += tidyFML_fileSize(tidyAbsolutePath);
+    }
+    else{
+      tidyNum += tidyFML_folderSize(tidyAbsolutePath);
+    }
+  } while(FindNextFile(tidyDir, &tidyFind) != 0);
+  return tidyNum;
+}
+
+long tidyFML_size(const char[] tidyPath){
+  if(tidyFML_isFile(tidyPath)){
+    return tidyFML_fileSize(tidyPath);
+  }
+  else if(tidyFML_isFolder(tidyPath)){
+    return tidyFML_folderSize(tidyPath);
+  }
+  else{
+    return -1;
+  }
+}
+
+TidyOSType tidyFML_getOSType(){
+#ifdef _WIN32
+  return WINDOWS;
+#else
+  return UNIX;
+}
+static TidyOSType tidyOSType = tidyFML_getOSType();
+
+long tidyFML_getTidyMaxPath(){
+  return (long)TIDY_MAX_PATH;
+}
+static long tidyMaxPath = tidyFML_getTidyMaxPath();
